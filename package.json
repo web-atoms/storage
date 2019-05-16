@@ -1,0 +1,23 @@
+{
+  "name": "@web-atoms/storage",
+  "version": "1.0.0",
+  "description": "Session, Local and Database storage for Web Atoms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-atoms/storage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/web-atoms/storage/issues"
+  },
+  "homepage": "https://github.com/web-atoms/storage#readme",
+  "dependencies": {
+    "web-atoms-amd-loader": "^1.0.332",
+    "web-atoms-core": "^1.0.666"
+  }
+}
