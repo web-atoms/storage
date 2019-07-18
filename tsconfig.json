@@ -9,6 +9,7 @@
         "downlevelIteration": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "declarationMap": true,
         "lib": [
             "es6",
             "dom"
