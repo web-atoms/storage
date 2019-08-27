@@ -18,7 +18,7 @@ export default class WebPreferences extends Preferences {
 
     public get permanent(): ISynchronousStorage {
         return this.mPermanent ||
-            (this.mPermanent = new SyncStorage("wa-pref", window.sessionStorage, this.jsonService));
+            (this.mPermanent = new SyncStorage("wa-pref", window.localStorage, this.jsonService));
     }
 }
 
