@@ -1,4 +1,4 @@
-import DISingleton from "web-atoms-core/dist/di/DISingleton";
+import DISingleton from "@web-atoms/core/dist/di/DISingleton";
 
 @DISingleton({
     inject: "./{platform}/Preferences"

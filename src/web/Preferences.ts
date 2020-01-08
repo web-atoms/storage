@@ -1,5 +1,5 @@
-import { Inject } from "web-atoms-core/dist/di/Inject";
-import { JsonService } from "web-atoms-core/dist/services/JsonService";
+import { Inject } from "@web-atoms/core/dist/di/Inject";
+import { JsonService } from "@web-atoms/core/dist/services/JsonService";
 import Preferences, { ISynchronousStorage } from "../Preferences";
 
 export default class WebPreferences extends Preferences {
