@@ -3,10 +3,11 @@ import { JsonService } from "@web-atoms/core/dist/services/JsonService";
 import Preferences, { ISynchronousStorage } from "../Preferences";
 import { SyncStorage } from "../SyncStorage";
 
-export default class WebPreferences extends Preferences {
+declare var bridge: { preferences: Storage };
+
+export default class XFPreferences extends Preferences {
 
     private mSession: ISynchronousStorage;
-    private mPermanent: ISynchronousStorage;
 
     constructor(
         @Inject private jsonService: JsonService) {
@@ -14,11 +15,10 @@ export default class WebPreferences extends Preferences {
     }
 
     public get session(): ISynchronousStorage {
-        return this.mSession || (this.mSession = new SyncStorage("wa-pref", window.sessionStorage, this.jsonService));
+        return this.mSession || (this.mSession = new SyncStorage("wa-pref", bridge.preferences, this.jsonService));
     }
 
     public get permanent(): ISynchronousStorage {
-        return this.mPermanent ||
-            (this.mPermanent = new SyncStorage("wa-pref", window.localStorage, this.jsonService));
+        return this.session;
     }
 }
