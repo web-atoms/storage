@@ -29,7 +29,7 @@ export class SqliteTransaction {
         return this.tx.executeSqlAsync(text, p);
     }
 
-    public insertAsync(table: string, obj: ISqliteResult): Promise<ISqliteResult> {
+    public insertAsync(table: string, obj: ISqliteRecord): Promise<ISqliteResult> {
         table = escapeLiteral(table);
         const fields = [];
         const values = [];
@@ -46,7 +46,7 @@ export class SqliteTransaction {
         return this.executeSqlAsync(sql, values);
     }
 
-    public updateAsync(table: string, obj: ISqliteResult, filter?: IQueryFragments): Promise<ISqliteResult> {
+    public updateAsync(table: string, obj: ISqliteRecord, filter?: IQueryFragments): Promise<ISqliteResult> {
         let set = Query.fragments(" SET ", " , ");
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
