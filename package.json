@@ -4,7 +4,7 @@
   "description": "Session, Local and Database storage for Web Atoms",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "node ./node_modules/@web-atoms/unit-test/index.js ./dist/tests",
     "postversion": "git push --follow-tags"
   },
   "repository": {
@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/web-atoms/storage#readme",
   "dependencies": {
-    "@web-atoms/module-loader": "^1.0.429",
-    "@web-atoms/core": "^1.2.8"
+    "@web-atoms/core": "^1.2.36",
+    "@web-atoms/module-loader": "^1.0.431"
+  },
+  "devDependencies": {
+    "@web-atoms/unit-test": "1.0.28"
   }
 }

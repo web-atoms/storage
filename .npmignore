@@ -1,1 +1,9 @@
 node_modules/
+src/tests
+dist/tests
+package-lock.json
+.vscode
+.github
+tsconfig.json
+tslint.json
+waconfig.json
