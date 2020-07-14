@@ -52,7 +52,7 @@ export class SqliteTransaction {
         return this.executeSqlAsync(sql, values);
     }
 
-    public updateAsync(table: string, obj: ISqliteRecord, filter?: IQueryFragments): Promise<ISqliteResult> {
+    public updateAsync(table: string, obj: ISqliteRecord, filter?: IQuery): Promise<ISqliteResult> {
         let set = Query.fragments(" SET ", " , ");
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
@@ -75,7 +75,7 @@ export class SqliteTransaction {
         return this.executeSqlAsync(q.command, q.arguments);
     }
 
-    public deleteAsync(table: string, filter?: IQueryFragments): Promise<ISqliteResult> {
+    public deleteAsync(table: string, filter?: IQuery): Promise<ISqliteResult> {
         const tableName = Query.literal(table, escapeLiteral);
         const sql = filter
             ? Query.create `DELETE ${tableName} WHERE ${filter}`
