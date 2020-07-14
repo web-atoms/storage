@@ -39,7 +39,8 @@ export class SqliteTransaction {
                 const element = obj[key];
                 if (key.startsWith("_$_")
                     || (typeof element === "object" && !(element instanceof Date))
-                    || Array.isArray(element)) {
+                    || Array.isArray(element)
+                    || element === undefined) {
                     continue;
                 }
                 params.push("?");
@@ -58,7 +59,8 @@ export class SqliteTransaction {
                 const element = obj[key];
                 if (key.startsWith("_$_")
                     || (typeof element === "object" && !(element instanceof Date))
-                    || Array.isArray(element)) {
+                    || Array.isArray(element)
+                    || element === undefined) {
                     continue;
                 }
                 const name = Query.literal(key, escapeLiteral);
