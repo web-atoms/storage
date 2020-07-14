@@ -1,6 +1,6 @@
 {
   "name": "@web-atoms/storage",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Session, Local and Database storage for Web Atoms",
   "main": "index.js",
   "scripts": {
