@@ -78,8 +78,8 @@ export class SqliteTransaction {
     public deleteAsync(table: string, filter?: IQuery): Promise<ISqliteResult> {
         const tableName = Query.literal(table, escapeLiteral);
         const sql = filter
-            ? Query.create `DELETE ${tableName} WHERE ${filter}`
-            : Query.create `DELETE ${tableName} `;
+            ? Query.create `DELETE FROM ${tableName} WHERE ${filter}`
+            : Query.create `DELETE FROM ${tableName} `;
         const q = sql.toQueryArguments();
         return this.executeSqlAsync(q.command, q.arguments);
     }
