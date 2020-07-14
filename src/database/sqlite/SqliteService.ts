@@ -21,11 +21,11 @@ export interface ISqliteRecord {
 export class SqliteTransaction {
     constructor(private tx: any) {}
 
-    public executeSql(text: string, p: any[], cb?: (r: ISqliteResult) => void) {
+    public executeSql(text: string, p?: any[], cb?: (r: ISqliteResult) => void) {
         this.tx.executeSql(text, p, cb);
     }
 
-    public executeSqlAsync(text: string, p: any[]): Promise<ISqliteResult> {
+    public executeSqlAsync(text: string, p?: any[]): Promise<ISqliteResult> {
         return this.tx.executeSqlAsync(text, p);
     }
 
