@@ -29,7 +29,7 @@ class QueryFragments implements IQueryFragments {
         const isEmpty = this.fragments.length === 0;
 
         if (!(query instanceof QueryObject)) {
-            query = QueryObject.create(query as TemplateStringsArray, args);
+            query = QueryObject.create(query as TemplateStringsArray, ... args);
         }
         // this.fragments.push(query);
         const fa = (query as any).fragments as IQueryPart[];
