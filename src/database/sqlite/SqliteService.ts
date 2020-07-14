@@ -37,6 +37,9 @@ export class SqliteTransaction {
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
                 const element = obj[key];
+                if (key.startsWith("_$_") || typeof element === "object" || Array.isArray(element)) {
+                    continue;
+                }
                 params.push("?");
                 fields.push(escapeLiteral(key));
                 values.push(element);
@@ -51,6 +54,9 @@ export class SqliteTransaction {
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
                 const element = obj[key];
+                if (key.startsWith("_$_") || typeof element === "object" || Array.isArray(element)) {
+                    continue;
+                }
                 const name = Query.literal(key, escapeLiteral);
                 set = set.add ` ${name} = ${element} `;
             }
