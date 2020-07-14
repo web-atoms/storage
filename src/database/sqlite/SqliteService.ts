@@ -1,6 +1,11 @@
 import DISingleton from "@web-atoms/core/dist/di/DISingleton";
+import Query, { IQuery, IQueryFragments } from "../../query/Query";
 
 declare var bridge;
+
+function escapeLiteral(name: string) {
+    return `"${name.replace(/\"/g, "\\\"")}"`;
+}
 
 export interface ISqliteResult {
     error?: string;
@@ -25,6 +30,7 @@ export class SqliteTransaction {
     }
 
     public insertAsync(table: string, obj: ISqliteResult): Promise<ISqliteResult> {
+        table = escapeLiteral(table);
         const fields = [];
         const values = [];
         const params = [];
@@ -32,7 +38,7 @@ export class SqliteTransaction {
             if (obj.hasOwnProperty(key)) {
                 const element = obj[key];
                 params.push("?");
-                fields.push(key);
+                fields.push(escapeLiteral(key));
                 values.push(element);
             }
         }
@@ -40,20 +46,30 @@ export class SqliteTransaction {
         return this.executeSqlAsync(sql, values);
     }
 
-    public updateAsync(table: string, obj: ISqliteResult): Promise<ISqliteResult> {
-        const fields = [];
-        const values = [];
-        const params = [];
+    public updateAsync(table: string, obj: ISqliteResult, filter?: IQueryFragments): Promise<ISqliteResult> {
+        let set = Query.fragments(" SET ", " , ");
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
                 const element = obj[key];
-                params.push("?");
-                fields.push(key);
-                values.push(element);
+                const name = Query.literal(key, escapeLiteral);
+                set = set.add ` ${name} = ${element} `;
             }
         }
-        const sql = `INSERT INTO ${table} (${fields.join(",")}) VALUES (${params.join(",")})`;
-        return this.executeSqlAsync(sql, values);
+        const tableName = Query.literal(table, escapeLiteral);
+        const sql = filter
+            ? Query.create `UPDATE ${tableName} ${set} WHERE ${filter}`
+            : Query.create `UPDATE ${tableName} ${set}`;
+        const q = sql.toQueryArguments();
+        return this.executeSqlAsync(q.command, q.arguments);
+    }
+
+    public deleteAsync(table: string, filter?: IQueryFragments): Promise<ISqliteResult> {
+        const tableName = Query.literal(table, escapeLiteral);
+        const sql = filter
+            ? Query.create `DELETE ${tableName} WHERE ${filter}`
+            : Query.create `DELETE ${tableName} `;
+        const q = sql.toQueryArguments();
+        return this.executeSqlAsync(q.command, q.arguments);
     }
 }
 

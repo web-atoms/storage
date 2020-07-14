@@ -24,4 +24,20 @@ export default class QueryTest extends TestItem {
         Assert.equals("SELECT * FROM PRODUCTS WHERE id = @p0 AND name = @p1", query.command);
     }
 
+    @Test
+    public literalTest() {
+
+        const tableName = Query.literal("PRODUCTS");
+
+        let filter = Query.fragments("WHERE ", " AND ");
+        filter = filter.add `id = ${2}`;
+        filter = filter.add `name = ${"a"}`;
+
+        const q = Query.create `SELECT * FROM ${tableName} ${filter}`;
+
+        const query = q.toQuery();
+
+        Assert.equals("SELECT * FROM PRODUCTS WHERE id = @p0 AND name = @p1", query.command);
+    }
+
 }
