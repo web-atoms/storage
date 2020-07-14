@@ -91,8 +91,16 @@ export class SqliteConnection {
 @DISingleton()
 export default class SqliteService {
 
-    public openDatabase(name: string, ... p: any[] ): SqliteConnection {
-        return new SqliteConnection(bridge.database.openDatabase(name));
+    /**
+     * Opens database on the device, if the version is different, old database is deleted
+     * and new empty one is created
+     * @param file file name of Database
+     * @param version version
+     * @param name Description
+     * @param size Ignored on Web Atoms
+     */
+    public openDatabase(file: string, version?: number, name?: string, size?: number ): SqliteConnection {
+        return new SqliteConnection(bridge.database.openDatabase(file, version, name, size));
     }
 
 }
