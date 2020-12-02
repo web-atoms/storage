@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/web-atoms/storage#readme",
   "dependencies": {
-    "@web-atoms/core": "^1.2.36",
+    "@web-atoms/core": "^2.0.2",
     "@web-atoms/module-loader": "^1.0.431"
   },
   "devDependencies": {
