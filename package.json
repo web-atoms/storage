@@ -19,7 +19,7 @@
   "homepage": "https://github.com/web-atoms/storage#readme",
   "dependencies": {
     "@web-atoms/core": "^2.0.2",
-    "@web-atoms/module-loader": "^1.0.431"
+    "@web-atoms/module-loader": "^2.0.6"
   },
   "devDependencies": {
     "@web-atoms/unit-test": "1.0.28"
